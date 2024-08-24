@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            font-size: 24px;
+            color: #137314;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .form-group:nth-child(odd) {
+            background-color: #e0f7fa; /* Light cyan */
+        }
+        .form-group:nth-child(even) {
+            background-color: #fce4ec; /* Light pink */
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield; /* Firefox */
+            -webkit-appearance: none; /* Chrome, Safari, Edge */
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #00796b; /* Teal */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        button:hover {
+            background-color: #004d40; /* Darker teal */
+        }
+        .back-button {
+            background-color: #d32f2f; /* Red */
+        }
+        .back-button:hover {
+            background-color: #b71c1c; /* Darker red */
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            let data = JSON.parse(localStorage.getItem('editData'));
+            if (data) {
+                document.getElementById('serial_no').value = data.serial_no;
+                document.getElementById('client').value = data.client;
+                document.getElementById('po_number').value = data.po_number;
+                document.getElementById('po_recd_date').value = data.po_recd_date;
+                document.getElementById('po_value').value = data.po_value;
+                document.getElementById('item').value = data.item;
+                document.getElementById('delivery_due_date').value = data.delivery_due_date;
+                document.getElementById('so_number').value = data.so_number;
+                document.getElementById('delivery_status').value = data.delivery_status;
+                document.getElementById('invoice_no').value = data.invoice_no;
+                document.getElementById('invoice_value').value = data.invoice_value;
+                document.getElementById('delivered_by').value = data.delivered_by;
+                document.getElementById('pending_item_value').value = data.pending_item_value;
+                document.getElementById('materials_delivered').value = data.materials_delivered;
+                document.getElementById('completed_status').value = data.completed_status;
+                document.getElementById('remarks').value = data.remarks;
+            }
+        };
+
+        function saveChanges(event) {
+            event.preventDefault(); // Prevent the default form submission
+            let formData = new FormData(document.querySelector('form'));
+            let data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            // Save updated data to localStorage
+            localStorage.setItem('purchaseOrderData', JSON.stringify(data));
+            // Redirect back to view_data.html
+            window.location.href = 'view_data.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Edit Data</h1>
+        <form onsubmit="saveChanges(event)">
+            <div class="form-group">
+                <label for="serial_no">Serial No</label>
+                <input type="text" id="serial_no" name="serial_no" readonly>
+            </div>
+            <div class="form-group">
+                <label for="client">Client</label>
+                <input type="text" id="client" name="client" required>
+            </div>
+            <div class="form-group">
+                <label for="po_number">PO Number</label>
+                <input type="text" id="po_number" name="po_number" required>
+            </div>
+            <div class="form-group">
+                <label for="po_recd_date">PO Recd Date</label>
+                <input type="date" id="po_recd_date" name="po_recd_date" required>
+            </div>
+            <div class="form-group">
+                <label for="po_value">PO Value</label>
+                <input type="text" id="po_value" name="po_value" required>
+            </div>
+            <div class="form-group">
+                <label for="item">Item</label>
+                <input type="text" id="item" name="item" required>
+            </div>
+            <div class="form-group">
+                <label for="delivery_due_date">Delivery Due Date</label>
+                <input type="date" id="delivery_due_date" name="delivery_due_date" required>
+            </div>
+            <div class="form-group">
+                <label for="so_number">SO Number</label>
+                <input type="text" id="so_number" name="so_number" required>
+            </div>
+            <div class="form-group">
+                <label for="delivery_status">Delivery Status</label>
+                <select id="delivery_status" name="delivery_status">
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="invoice_no">Invoice No</label>
+                <input type="text" id="invoice_no" name="invoice_no" required>
+            </div>
+            <div class="form-group">
+                <label for="invoice_value">Invoice Value</label>
+                <input type="text" id="invoice_value" name="invoice_value" required>
+            </div>
+            <div class="form-group">
+                <label for="delivered_by">Delivered By</label>
+                <input type="text" id="delivered_by" name="delivered_by" required>
+            </div>
+            <div class="form-group">
+                <label for="pending_item_value">Pending Item Value</label>
+                <input type="text" id="pending_item_value" name="pending_item_value" required>
+            </div>
+            <div class="form-group">
+                <label for="materials_delivered">Materials Delivered</label>
+                <input type="text" id="materials_delivered" name="materials_delivered" required>
+            </div>
+            <div class="form-group">
+                <label for="completed_status">Completed Status</label>
+                <select id="completed_status" name="completed_status">
+                    <option value="Not Completed">Not Completed</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="remarks">Remarks</label>
+                <input type="text" id="remarks" name="remarks">
+            </div>
+            <button type="submit">Save Changes</button>
+            <button type="button" class="back-button" onclick="window.location.href='view_data.html'">Back</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 3 - Completed Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            font-size: 24px;
+            color: #137314;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #00796b;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        button:hover {
+            background-color: #004d40;
+        }
+        .back-button {
+            background-color: #d32f2f;
+        }
+        .back-button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Stage 3 - Completed Orders</h1>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Serial No</th>
+                    <th>Client</th>
+                    <th>PO Number</th>
+                    <th>PO Recd Date</th>
+                    <th>PO Value</th>
+                    <th>Item</th>
+                    <th>Delivery Due Date</th>
+                    <th>SO Number</th>
+                    <th>Delivery Status</th>
+                    <th>Invoice No</th>
+                    <th>Invoice Value</th>
+                    <th>Delivered By</th>
+                    <th>Pending Item Value</th>
+                    <th>Materials Delivered</th>
+                    <th>Completed Status</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+        <button onclick="window.location.href='purchase_order.html'" class="back-button">Back</button>
+    </div>
+    <script>
+        window.onload = function() {
+            let data = JSON.parse(localStorage.getItem('purchaseOrderData'));
+            if (data && data.completed_status === 'Completed') {
+                let tableBody = document.querySelector('#dataTable tbody');
+                let row = `<tr>
+                    <td>${data.serial_no || ''}</td>
+                    <td>${data.client || ''}</td>
+                    <td>${data.po_number || ''}</td>
+                    <td>${data.po_recd_date || ''}</td>
+                    <td>${data.po_value || ''}</td>
+                    <td>${data.item || ''}</td>
+                    <td>${data.delivery_due_date || ''}</td>
+                    <td>${data.so_number || ''}</td>
+                    <td>${data.delivery_status || ''}</td>
+                    <td>${data.invoice_no || ''}</td>
+                    <td>${data.invoice_value || ''}</td>
+                    <td>${data.delivered_by || ''}</td>
+                    <td>${data.pending_item_value || ''}</td>
+                    <td>${data.materials_delivered || ''}</td>
+                    <td>${data.completed_status || ''}</td>
+                    <td>${data.remarks || ''}</td>
+                    <td><button class="edit-button" onclick="editData()">Edit</button></td>
+                </tr>`;
+                tableBody.innerHTML = row;
+            }
+        };
+
+        function editData() {
+            let data = JSON.parse(localStorage.getItem('purchaseOrderData'));
+            if (data) {
+                localStorage.setItem('editData', JSON.stringify(data));
+                window.location.href = 'edit_data.html';
+            }
+        }
+    </script>
+</body>
+</html>

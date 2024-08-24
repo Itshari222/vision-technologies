@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 20px;
+            font-size: 18px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #ff6347; /* Tomato color for heading */
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .button {
+            background-color: #ffa07a;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 20px;
+            margin: 10px;
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #ff4500;
+        }
+        .back-button {
+            background-color: #4682b4;
+        }
+        .back-button:hover {
+            background-color: #4169e1;
+        }
+        .hidden {
+            display: none;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Display Options</h1>
+        <div class="button-container">
+            <button class="button" onclick="showPurchaseOrderOptions()">Purchase Order</button>
+            <a href="inward.html" class="button">Inward</a>
+            <a href="outward.html" class="button">Outward</a>
+        </div>
+
+        <div id="purchaseOrderOptions" class="hidden button-group">
+            <a href="purchase_order.html" class="button">Stage 1</a>
+            <a href="stage2.html" class="button">Stage 2</a>
+            <a href="stage3.html" class="button">Stage 3</a>
+        </div>
+
+        <br>
+        <a href="index.html" class="button back-button">Back to Home</a>
+    </div>
+
+    <script>
+        function showPurchaseOrderOptions() {
+            const options = document.getElementById('purchaseOrderOptions');
+            options.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
